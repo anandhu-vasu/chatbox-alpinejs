@@ -9,7 +9,7 @@ export default (ns) =>
             <div class="chat-window">
     
                 <div class="chat-header">
-                    <h2>Chat Widow</h>
+                    <h2 x-text='title' ></h>
                 </div>
     
                 <div class="chat-area">

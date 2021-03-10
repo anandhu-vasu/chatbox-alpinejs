@@ -1,4 +1,3 @@
-
 import {$data} from './utils'
 
 function Initialize(token,url){

@@ -167,7 +167,7 @@ ${ns} .message .avatar img{
     width:100%;
 }
 ${ns} .message .text{
-    margin:25px 10px;
+    margin:15px 10px 10px 10px;
 }
 ${ns} .message .text span{
     display:inline-block;

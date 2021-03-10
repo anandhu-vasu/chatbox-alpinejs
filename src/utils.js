@@ -14,6 +14,6 @@ function addStyle(styles,ns) {
     document.getElementsByTagName("head")[0].appendChild(css); 
 }
 
-const $data = ()=>document.querySelector(`#${window.$namespace} #${window.$namespace}-component[x-data]`).__x.$data;
+const $data = () => document.querySelector(`#${window.$namespace} #${window.$namespace}-component[x-data]`).__x.$data;
 
 export {addTemplate,addStyle,$data}
