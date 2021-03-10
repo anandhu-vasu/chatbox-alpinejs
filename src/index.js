@@ -1,11 +1,11 @@
 import 'alpinejs'
-
-const namespace = "app"
+const namespace = "KingSpinAI"
 
 import template from './template'
 import style from './style'
 import * as app from './app'
 import {addTemplate,addStyle} from './utils'
+
 
 addStyle(style,namespace)
 

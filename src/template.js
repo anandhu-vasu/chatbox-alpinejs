@@ -4,7 +4,7 @@ export default (ns) =>
 /* template */`
 <div x-data=" ${ns}.Chatbox() " id="${ns}-component">
     <template x-if="isInitialized" >
-        <div x-show.transition="open" x-on:click.away="open=false" class="chat-window-wrapper">
+        <div x-show.transition="open" x-on:click.away="open=false" class="chat-window-wrapper" >
             <div class="chat-window-blur"></div>
             <div class="chat-window">
     
@@ -12,7 +12,7 @@ export default (ns) =>
                     <h2 x-text='title' ></h>
                 </div>
     
-                <div class="chat-area">
+                <div class="chat-area" x-ref="chat_area">
                     <template x-for="message in messages" :key="message.time">
                         <div>
                             <template x-if="message.type=='sent'">
@@ -21,7 +21,7 @@ export default (ns) =>
                                         <span x-text="message.text" ></span>
                                     </div>
                                     <div class="avatar"> ${assets.user_svg} </div>
-                                    <div class="time" x-text="(new Date(message.time)).toLocaleTimeString()" ><div>
+                                    <div class="time" x-text="(new Date(message.time)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })" ><div>
                                 </div>
                             </template>
                             <template x-if="message.type=='reply'">
@@ -35,7 +35,7 @@ export default (ns) =>
                             </template>
                         </div>
                     </template>
-                    <div x-show.transition="replyWaiting" class="message reply">
+                    <div x-show.transition.in="replyWaiting" class="message reply">
                         <div class="avatar"> ${assets.bot_png} </div>
                         <div class="text">
                             <span>${assets.chat_loading_gif}</span>

@@ -17,14 +17,29 @@ function Chatbox(){
                 this.isInitialized = true
             }
         },
-        sendMessage(){
+        sendMessage(start){
             let text = ""
             if(this.text != ""){
                 this.messages.push({type:"sent",text:this.text,time:Date.now()})
                 text = this.text
                 this.text = ""
+                this.replyWaiting = true
             }
-            this.replyWaiting = true;
+
+            const final = () => {
+                this.replyWaiting = false;
+                setTimeout(this.scrollBottom,500)
+
+            }
+            const onError = (error)=>{
+                if(error.response){
+                    let response = error.response
+                    if(response.status == 401){
+                        console.log(error.messages)
+                    }
+                }
+                this.isInitialized = false
+            }
 
             if(this.token.expiry*1000 > Date.now()){
 
@@ -36,32 +51,27 @@ function Chatbox(){
                     }
                 }
 
-                let onerror = (error)=>{
-                    if(error.response){
-                        let response = error.response
-                        if(response.status == 401){
-                            console.log(error.messages)
-                        }
-                    }
-                }
 
-                if(!this.isStarted){
+                if(start && !this.isStarted){
+                    this.replyWaiting = true
                     axios.get(this.url+'bot/chat/',config).then(response=>{
+                        this.replyWaiting = false
                         for(const message of response.data.messages){
                             this.messages.push({type:"reply",text:message,time:Date.now()})
                         }
                         this.isStarted = true
-                    }).catch(onerror)
+                    }).catch(onError).then(final)
                     
                 }else if(text){
                     const data = {
                         message: text
                     }
                     axios.post(this.url+'bot/chat/',data,config).then(response=>{
+                        this.replyWaiting = false
                         for(const message of response.data.messages){
                             this.messages.push({type:"reply",text:message,time:Date.now()})
                         }
-                    }).catch(onerror)
+                    }).catch(onError).then(final)
                 }
 
             }else{
@@ -80,20 +90,11 @@ function Chatbox(){
                 axios.post(this.url+'token/refresh/',data,config).then(response=>{
                     this.token.access = response.data.access
                     this.token.expiry = response.data.expiry
-                    this.sendMessage()
-                    console.log("good")
-                }).catch(error=>{
-                    if(error.response){
-                        let response = error.response
-                        if(response.status == 401){
-                            console.log(error.messages)
-                        }
-                    }
-                })
+                    this.sendMessage(start)
+                }).catch(onError).then(final)
             }
+            setTimeout(this.scrollBottom,500)
 
-            this.replyWaiting = false
-            
         },
         startChat(){
             if(!this.isInitialized){
@@ -103,8 +104,12 @@ function Chatbox(){
             this.open = true
             this.$refs.chat_input.focus()
 
-            this.sendMessage()
+            this.sendMessage(true)
+        },scrollBottom(){
+            let area =document.querySelector(`#${window.$namespace} .chat-area`);
+                area.scrollTop = area.scrollHeight;
         }
+        
     }
 }
 

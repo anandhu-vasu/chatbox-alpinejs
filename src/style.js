@@ -111,9 +111,11 @@ ${ns} .chat-header{
 }
 ${ns} .chat-area{
     flex-grow:1;
-    margin:10px;
+    padding:10px;
     overflow:hidden;
     overflow-y:auto;
+    position:relative;
+    height:100%;
 }
 ${ns} .chat-action{
     flex-grow:0;

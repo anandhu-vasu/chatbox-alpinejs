@@ -1,6 +1,6 @@
 import {$data} from './utils'
 
-function Initialize(token,url){
+function Initialize(token,url,title){
     try{
         if(token == null)
             throw new TypeError("Token is Null")
@@ -23,6 +23,9 @@ function Initialize(token,url){
             if(url.charAt(url.length-1)!='/')
                 url = url+'/'
             window[$namespace].$url=url
+        }
+        if(title){
+            $data().title = title
         }
 
         $data().token = token
