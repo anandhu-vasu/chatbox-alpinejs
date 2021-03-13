@@ -1,6 +1,6 @@
 import {$data} from './utils'
 
-function Initialize(token,url,title){
+function Initialize(token,options){
     try{
         if(token == null)
             throw new TypeError("Token is Null")
@@ -8,6 +8,9 @@ function Initialize(token,url,title){
             token = JSON.parse(token)
         else if(typeof token != 'object')
             throw new TypeError("Token is not a Object")
+        if(options && typeof options != "object"){
+            throw new TypeError("Options is not a Object")
+        }
 
         if(!token.hasOwnProperty('access')){
             throw new Error("Token has no key 'access'")
@@ -18,14 +21,19 @@ function Initialize(token,url,title){
         if(!token.hasOwnProperty('expiry')){
             throw new Error("Token has no key 'expiry'")
         }
-        if(url){
+        if(options){    
+            if(options.hasOwnProperty('url')){
 
-            if(url.charAt(url.length-1)!='/')
-                url = url+'/'
-            window[$namespace].$url=url
-        }
-        if(title){
-            $data().title = title
+                if(options.url.charAt(options.url.length-1)!='/')
+                    options.url = options.url+'/'
+                window[$namespace].$url=options.url
+            }
+            if(options.hasOwnProperty('title')){
+                $data().title = options.title
+            }
+            if(options.hasOwnProperty('subtitle')){
+                $data().subtitle = options.subtitle
+            }
         }
 
         $data().token = token

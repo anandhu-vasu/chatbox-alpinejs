@@ -5,6 +5,7 @@ function Chatbox(){
         open:false,
         replyWaiting:false,
         title:"Chat Box",
+        subtitle:"",
         text:"",
         token:null,
         url:"",
@@ -17,15 +18,15 @@ function Chatbox(){
                 this.isInitialized = true
             }
         },
-        sendMessage(start){
-            let text = ""
-            if(this.text != ""){
-                this.messages.push({type:"sent",text:this.text,time:Date.now()})
-                text = this.text
-                this.text = ""
-                this.replyWaiting = true
+        sendMessage(start,text){
+            if(!text){
+                if(this.text != ""){
+                    this.messages.push({type:"sent",text:this.text,time:Date.now()})
+                    text = this.text
+                    this.text = ""
+                    this.replyWaiting = true
+                }
             }
-
             const final = () => {
                 this.replyWaiting = false;
                 setTimeout(this.scrollBottom,500)
@@ -38,7 +39,10 @@ function Chatbox(){
                         console.log(error.messages)
                     }
                 }
+                window[window.$namespace].$status="NOT INITIALIZED"
                 this.isInitialized = false
+                this.open = false
+                return
             }
 
             if(this.token.expiry*1000 > Date.now()){
@@ -90,7 +94,7 @@ function Chatbox(){
                 axios.post(this.url+'token/refresh/',data,config).then(response=>{
                     this.token.access = response.data.access
                     this.token.expiry = response.data.expiry
-                    this.sendMessage(start)
+                    this.sendMessage(start,text)
                 }).catch(onError).then(final)
             }
             setTimeout(this.scrollBottom,500)
@@ -107,7 +111,9 @@ function Chatbox(){
             this.sendMessage(true)
         },scrollBottom(){
             let area =document.querySelector(`#${window.$namespace} .chat-area`);
-                area.scrollTop = area.scrollHeight;
+            if(area){ 
+                area.scrollTop = area.scrollHeight
+            }
         }
         
     }

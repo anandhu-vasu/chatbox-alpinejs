@@ -9,7 +9,8 @@ export default (ns) =>
             <div class="chat-window">
     
                 <div class="chat-header">
-                    <h2 x-text='title' ></h>
+                    <h2 x-text='title' ></h2>
+                    <i x-text='subtitle'></i>
                 </div>
     
                 <div class="chat-area" x-ref="chat_area">
@@ -30,7 +31,7 @@ export default (ns) =>
                                     <div class="text">
                                         <span x-text="message.text" ></span>
                                     </div>
-                                    <div class="time" x-text="(new Date(message.time)).toLocaleTimeString()" ><div>
+                                    <div class="time" x-text="(new Date(message.time)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })" ><div>
                                 </div>
                             </template>
                         </div>

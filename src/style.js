@@ -16,6 +16,10 @@ ${ns},${ns} *{
     padding:0;
     margin:0;
 }
+${ns}{
+    position:relative;
+    z-index:10000 !important;
+}
 ${ns} button{
     cursor:pointer;
     transition: all 0.1s;
@@ -169,7 +173,7 @@ ${ns} .message .avatar img{
     width:100%;
 }
 ${ns} .message .text{
-    margin:15px 10px 10px 10px;
+    margin:16px 10px 8px 10px;
 }
 ${ns} .message .text span{
     display:inline-block;
