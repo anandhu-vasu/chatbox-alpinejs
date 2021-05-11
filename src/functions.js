@@ -2,6 +2,8 @@ import {$data} from './utils'
 
 function Initialize(token,options){
     try{
+        let data = $data()
+
         if(token == null)
             throw new TypeError("Token is Null")
         if(typeof token ==  'string')
@@ -21,6 +23,13 @@ function Initialize(token,options){
         if(!token.hasOwnProperty('expiry')){
             throw new Error("Token has no key 'expiry'")
         }
+        if(token.hasOwnProperty('telegram')){
+            data.telegram = token.telegram
+        }
+        if(token.hasOwnProperty('facebook')){
+            data.facebook = token.facebook
+        }
+
         if(options){    
             if(options.hasOwnProperty('url')){
 
@@ -29,18 +38,25 @@ function Initialize(token,options){
                 window[$namespace].$url=options.url
             }
             if(options.hasOwnProperty('title')){
-                $data().title = options.title
+                data.title = options.title
             }
             if(options.hasOwnProperty('subtitle')){
-                $data().subtitle = options.subtitle
+                data.subtitle = options.subtitle
             }
+            if(options.hasOwnProperty('telegram')){
+                data.telegram = options.telegram
+            }
+            if(options.hasOwnProperty('facebook')){
+                data.facebook = options.facebook
+            }
+            if(options.hasOwnProperty('row')){
+                data.row = true
+            }else data.row = false
         }
+        data.token = token
+        data.url = window[$namespace].$url
+        data.isInitialized = true
 
-        $data().token = token
-        $data().url = window[$namespace].$url
-        $data().isInitialized = true
-
-        
     }catch(err){
         console.error(err.message)
     }
