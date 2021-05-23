@@ -188,10 +188,6 @@ ${ns} .message {
 }
 ${ns} .message .text {
     flex-grow: 1;
-    max-width:250px;
-}
-${ns} .message .text.text-right {
-    margin-left: 40px;
 }
 ${ns} .message .avatar {
     flex-grow: 0;
@@ -201,8 +197,7 @@ ${ns} .message .avatar {
     border-radius: 50%;
     background: dodgerblue;
 }
-${ns} .message.no-avatar .avatar img,
-${ns} .message.no-avatar .avatar svg{
+${ns} .message.no-avatar .avatar img{
     display: none;
 }
 ${ns} .message.no-avatar .avatar{
@@ -218,11 +213,8 @@ ${ns} .message .video,
 ${ns} .message .buttons {
     margin: 16px 10px 8px 10px;
 }
-${ns} .message.no-avatar {
-    margin-top: -8px !important;
-}
 ${ns} .message .image img,
-${ns} .message .video video{
+${ns} .message .video video,{
     display: inline-block;
     overflow: hidden;
     overflow-wrap: anywhere;
@@ -245,7 +237,7 @@ ${ns} .message.reply .buttons button{
     border-radius:10px;
     background: #fff5;
     padding: 5px 10px;
-    box-shadow:   -2px -2px 5px #fffa,3px 3px 7px rgba(55, 84, 170, 0.15),inset 0 0 15px rgba(55, 84, 170, 0), inset 0 0 20px rgba(255, 255, 255, 0), inset 0px 0px 4px rgba(255, 255, 255, 0.2) !important;
+    box-shadow:   -3px -3px 10px #fffa,3px 3px 7px rgba(55, 84, 170, 0.15),inset 0 0 15px rgba(55, 84, 170, 0), inset 0 0 20px rgba(255, 255, 255, 0), inset 0px 0px 4px rgba(255, 255, 255, 0.2) !important;
     transition: all 0.25s ease-in-out;
     margin: 2.5px 2.5px;
 }
@@ -265,7 +257,7 @@ ${ns} .message.reply .buttons button:before{
     filter:blur(25px);
 }
 ${ns} .message.reply .buttons button:hover{
-    box-shadow: -2px -2px 5px #fffa, 0px 0px 4px rgba(255, 255, 255, 0.2),inset 3px 3px 7px rgba(55, 84, 170, 0.15), inset -3px -3px 10px #fffa !important;
+    box-shadow: -3px -3px 10px #fffa, 0px 0px 4px rgba(255, 255, 255, 0.2),inset 3px 3px 7px rgba(55, 84, 170, 0.15), inset -3px -3px 10px #fffa !important;
     color: #2d95fb87;
 }
 ${ns} .message.reply .buttons button:active{
@@ -360,22 +352,6 @@ ${ns} .message .text span {
 ${ns} .message.sent .text span {
     border-radius: 25px 0px 25px 15px;
     background: lightblue;
-}
-
-${ns} .message.no-avatar .text span,
-${ns} .message.no-avatar .image img,
-${ns} .message.no-avatar .video video {
-    border-radius: 10px 25px 15px 25px;
-}
-${ns} .message.sent.no-avatar .text span {
-    border-radius: 25px 10px 25px 15px;
-}
-
-${ns} .message.force-text .text span {
-    background: LightSlateGray;
-    cursor: default;
-    border-radius: 15px;
-
 }
 
 ${ns} .message .time {

@@ -135,7 +135,6 @@ function Chatbox() {
                         .then(final);
                 }
             } else {
-                this.replyWaiting = true;
                 const data = {
                     refresh: this.token.refresh,
                 };

@@ -55,7 +55,6 @@ function Chatbox() {
                         mode: "sent",
                         type: "text",
                         content: this.content,
-                        force_content: false,
                         time: Date.now(),
                     });
                     content = this.content;
@@ -68,7 +67,6 @@ function Chatbox() {
                         mode: "sent",
                         type: "text",
                         content: force_content,
-                        force_content: true,
                         time: Date.now(),
                     });
                 }
@@ -135,7 +133,6 @@ function Chatbox() {
                         .then(final);
                 }
             } else {
-                this.replyWaiting = true;
                 const data = {
                     refresh: this.token.refresh,
                 };

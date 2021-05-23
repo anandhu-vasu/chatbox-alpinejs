@@ -222,7 +222,7 @@ ${ns} .message.no-avatar {
     margin-top: -8px !important;
 }
 ${ns} .message .image img,
-${ns} .message .video video{
+${ns} .message .video video,{
     display: inline-block;
     overflow: hidden;
     overflow-wrap: anywhere;
@@ -362,20 +362,11 @@ ${ns} .message.sent .text span {
     background: lightblue;
 }
 
-${ns} .message.no-avatar .text span,
-${ns} .message.no-avatar .image img,
-${ns} .message.no-avatar .video video {
-    border-radius: 10px 25px 15px 25px;
+${ns} .message.no-avatar .text span {
+    border-radius: 5px 25px 15px 25px;
 }
 ${ns} .message.sent.no-avatar .text span {
-    border-radius: 25px 10px 25px 15px;
-}
-
-${ns} .message.force-text .text span {
-    background: LightSlateGray;
-    cursor: default;
-    border-radius: 15px;
-
+    border-radius: 25px 5px 25px 15px;
 }
 
 ${ns} .message .time {

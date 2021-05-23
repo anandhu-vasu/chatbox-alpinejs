@@ -16,7 +16,7 @@ export default (ns) => /* html */ `
                     <template x-for="(message,i) in messages" :key="message.time">
                         <div>
                             <template x-if="message.mode=='sent'">
-                                <div class="message sent slide-right" :class="{'force-text':message.force_content,'no-avatar':message.type=='buttons' || (i>0 && messages[i-1].mode==message.mode)}">
+                                <div class="message sent slide-right" :class="{'no-avatar':message.type=='buttons' || (i>0 && messages[i-1].mode==message.mode)}">
                                     <div class="text text-right">
                                         <span x-text="message.content" class="scale-up-tr"></span>
                                     </div>
@@ -44,7 +44,9 @@ export default (ns) => /* html */ `
                                     </template>
                                     <template x-if="message.type=='video'">
                                         <div class="video">
-                                            <video class="scale-up-tl" :src="message.content" controls preload="metadata"></video>
+                                            <video class="scale-up-tl" controls>
+                                                <source :src="message.content" >
+                                            </video>
                                         </div>
                                     </template>
                                     <template x-if="message.type=='buttons'">

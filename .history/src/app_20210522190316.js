@@ -27,8 +27,7 @@ function Chatbox() {
             if (typeof message == "object") {
                 this.messages.push({
                     mode: "reply",
-                    ...message,
-                    time: Date.now(),
+                    ...this.message,
                 });
             } else {
                 let match = message.match(reg_media);
@@ -48,14 +47,13 @@ function Chatbox() {
                     });
             }
         },
-        sendMessage(start, content, force_content = null) {
+        sendMessage(start, content) {
             if (!content) {
                 if (this.content != "") {
                     this.messages.push({
                         mode: "sent",
                         type: "text",
                         content: this.content,
-                        force_content: false,
                         time: Date.now(),
                     });
                     content = this.content;
@@ -63,15 +61,6 @@ function Chatbox() {
                     this.replyWaiting = true;
                 }
             } else {
-                if (force_content) {
-                    this.messages.push({
-                        mode: "sent",
-                        type: "text",
-                        content: force_content,
-                        force_content: true,
-                        time: Date.now(),
-                    });
-                }
                 this.replyWaiting = true;
             }
 
@@ -135,7 +124,6 @@ function Chatbox() {
                         .then(final);
                 }
             } else {
-                this.replyWaiting = true;
                 const data = {
                     refresh: this.token.refresh,
                 };

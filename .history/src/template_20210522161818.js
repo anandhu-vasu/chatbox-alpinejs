@@ -13,10 +13,10 @@ export default (ns) => /* html */ `
                 </div>
     
                 <div class="chat-area" x-ref="chat_area">
-                    <template x-for="(message,i) in messages" :key="message.time">
+                    <template x-for="message in messages" :key="message.time">
                         <div>
                             <template x-if="message.mode=='sent'">
-                                <div class="message sent slide-right" :class="{'force-text':message.force_content,'no-avatar':message.type=='buttons' || (i>0 && messages[i-1].mode==message.mode)}">
+                                <div class="message sent slide-right">
                                     <div class="text text-right">
                                         <span x-text="message.content" class="scale-up-tr"></span>
                                     </div>
@@ -25,8 +25,8 @@ export default (ns) => /* html */ `
                                 </div>
                             </template>
                             <template x-if="message.mode=='reply'">
-                                <div class="message reply" :class="{'no-avatar':message.type=='buttons' || (i>0 && messages[i-1].mode==message.mode)}">
-                                    <div class="avatar"> ${assets.bot_png} </div>   
+                                <div class="message reply">
+                                    <div class="avatar"> ${assets.bot_png} </div>
                                     <template x-if="message.type=='text'">
                                         <div class="text">
                                             <span x-text="message.content" class="scale-up-tl" ></span>
@@ -44,17 +44,15 @@ export default (ns) => /* html */ `
                                     </template>
                                     <template x-if="message.type=='video'">
                                         <div class="video">
-                                            <video class="scale-up-tl" :src="message.content" controls preload="metadata"></video>
+                                            <video class="scale-up-tl" controls>
+                                                <source :src="message.content" >
+                                            </video>
                                         </div>
                                     </template>
-                                    <template x-if="message.type=='buttons'">
-                                        <div class="buttons">
-                                            <template x-for="button in message.buttons">
-                                                <button class="scale-up-tl" @click="sendMessage(null,button.callback,button.label)"><span x-text="button.label"></span></button>
-                                            </template>
-                                        </div>
-                                    </template>
-                                    <template x-if="message.type!='buttons'"><div class="time" x-text="(new Date(message.time)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })" ><div></template>
+                                    <div class="button">
+                                        <button>hai</button>
+                                    </div>
+                                    <div class="time" x-text="(new Date(message.time)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })" ><div>
                                 </div>
                             </template>
                         </div>

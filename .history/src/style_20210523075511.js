@@ -362,9 +362,7 @@ ${ns} .message.sent .text span {
     background: lightblue;
 }
 
-${ns} .message.no-avatar .text span,
-${ns} .message.no-avatar .image img,
-${ns} .message.no-avatar .video video {
+${ns} .message.no-avatar .text span {
     border-radius: 10px 25px 15px 25px;
 }
 ${ns} .message.sent.no-avatar .text span {

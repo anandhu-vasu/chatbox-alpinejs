@@ -44,7 +44,9 @@ export default (ns) => /* html */ `
                                     </template>
                                     <template x-if="message.type=='video'">
                                         <div class="video">
-                                            <video class="scale-up-tl" :src="message.content" controls preload="metadata"></video>
+                                            <video class="scale-up-tl" controls preload="metadata">
+                                                <source :src="message.content" >
+                                            </video>
                                         </div>
                                     </template>
                                     <template x-if="message.type=='buttons'">
